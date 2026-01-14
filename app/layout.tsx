@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Genius?",
+  title: "Gyaru AI Saas Platform",
   description: "AI Saas Platform",
 };
 

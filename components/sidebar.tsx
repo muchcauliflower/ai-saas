@@ -34,30 +34,30 @@ const routes = [
   {
     label: "Image Generations",
     icon: ImageIcon,
-    href: "/image-generate",
+    href: "/image-generation",
     color: "text-pink-700",
   },
   {
     label: "Video Generations",
     icon: VideoIcon,
-    href: "/video-generate",
+    href: "/video-generation",
     color: "text-orange-700",
   },
   {
     label: "Music Generation",
     icon: Music,
-    href: "/msuic-generate",
+    href: "/music",
     color: "text-emerald-500",
   },
   {
     label: "Code Generations",
     icon: Code,
-    href: "/code-generate",
+    href: "/code",
     color: "text-green-700",
   },
 
   {
-    label: "Search Pictures (Gyaru)",
+    label: "Image Search (Gyaru)",
     icon: FileImage,
     href: "/image-search",
     color: "text-yellow-700",

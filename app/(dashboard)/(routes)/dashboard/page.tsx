@@ -9,11 +9,12 @@ import {
   Music,
   VideoIcon,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-const tools = [
+const tool = [
   {
     label: "Conversation",
     icon: MessageSquare,
@@ -59,6 +60,7 @@ const tools = [
 ];
 
 export default function DashboardPage() {
+  const router = useRouter();
   return (
     <div>
       <div className="mb-8 space-y-4">
@@ -76,8 +78,9 @@ export default function DashboardPage() {
           />
         </div>
         <div className="px-4 md:px-20 lg:px-32 space-y-4">
-          {tools.map((tool) => (
+          {tool.map((tool) => (
             <Card
+              onClick={() => router.push(tool.href)}
               key={tool.href}
               className="p-4 border-black/5 flex items-start justify-between hover:shadow-md transition cursor-pointer"
             >

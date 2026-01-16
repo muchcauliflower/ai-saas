@@ -23,6 +23,9 @@ import Loader from "@/components/loader";
 import { cn } from "@/lib/utils";
 import { UserAvatar } from "@clerk/nextjs";
 import BotAvatar from "@/components/bot-avatar";
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const CodePage = () => {
   const route = useRouter();

@@ -32,6 +32,10 @@ export async function POST(req: Request) {
             }),
         });
 
+        const data = await response.json();
+
+        return NextResponse.json(data);
+
     }catch (error) {
         console.log("[CODE_ERROR]", error);
         return new NextResponse("Internal error", { status: 500 });

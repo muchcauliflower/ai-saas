@@ -6,11 +6,9 @@ export default function LandingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-full relative">
-      <main>
-        <Navbar />
-        {children}
-      </main>
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-1 flex justify-center">{children}</main>
     </div>
   );
 }

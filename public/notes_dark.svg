@@ -8,7 +8,7 @@
    fill="none"
    version="1.1"
    id="svg1"
-   sodipodi:docname="notes.svg"
+   sodipodi:docname="notes_dark.svg"
    inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -25,9 +25,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="0.51530407"
-     inkscape:cx="-45.604142"
-     inkscape:cy="281.38726"
+     inkscape:zoom="1.4575"
+     inkscape:cx="170.84048"
+     inkscape:cy="277.18696"
      inkscape:window-width="2560"
      inkscape:window-height="1406"
      inkscape:window-x="-11"
@@ -40,5 +40,6 @@
      stroke-width="2.25615"
      stroke-linecap="round"
      stroke-linejoin="round"
-     id="path1" />
+     id="path1"
+     style="stroke:#f8fafc;stroke-opacity:1" />
 </svg>

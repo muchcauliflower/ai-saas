@@ -4,11 +4,25 @@ import Heroes from "./_components/heroes";
 
 const LandingPage = () => {
   return (
-    <div className="h-full flex flex-col">
-      <div className="flex-1 flex flex-col items-center justify-center gap-y-8 px-6 text-center">
+    <div className="flex flex-col">
+      <section
+        className="
+          flex
+          flex-col
+          items-center
+          justify-center
+          gap-y-5
+          sm:gap-y-6
+          px-6
+          text-center
+          min-h-[70vh]
+          sm:min-h-[75vh]
+          lg:min-h-[82.75vh]
+        "
+      >
         <Heading />
         <Heroes />
-      </div>
+      </section>
 
       <Footer />
     </div>

@@ -11,6 +11,7 @@ import { useScrollTop } from "@/hooks/use-scroll-top";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/app/(landing)/_components/logo";
 import { ModeToggle } from "./mode-toggle";
+import { Button } from "./ui/button";
 
 const Navbar = () => {
   const scrolled = useScrollTop();
@@ -23,21 +24,34 @@ const Navbar = () => {
       )}
     >
       <Logo />
-      {/* to disable/comment mobile sidebar until i find something that can i can incorporate it with. Dashboard still works like the usual */}
+      {/* to disable/comment mobile sidebar until  i find something that can i can incorporate it with. Dashboard still works like the usual */}
       {/* <MobileSidebar /> */}
       <div className="flex w-full justify-end">
-        <ModeToggle />
-        <SignedOut>
-          <SignInButton />
-          <SignUpButton>
-            <button className="bg-[#6c47ff] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
-              Sign Up
-            </button>
-          </SignUpButton>
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
+        <div className="flex flex-row gap-4">
+          <div className="flex items-center">
+            <ModeToggle />
+          </div>
+
+          <SignedOut>
+            <div className="flex items-center">
+              <SignInButton mode="modal">
+                <Button size="sm">Get Jotion Free</Button>
+              </SignInButton>
+            </div>
+
+            <SignInButton />
+
+            <SignUpButton>
+              <button className="bg-[#6c47ff] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+                Sign Up
+              </button>
+            </SignUpButton>
+          </SignedOut>
+
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+        </div>
       </div>
     </div>
   );

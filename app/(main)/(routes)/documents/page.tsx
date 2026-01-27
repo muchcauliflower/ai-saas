@@ -1,7 +1,8 @@
+"use client";
 const DocumentsPage = () => {
   return (
     <div>
-      <h1>Documents Page</h1>
+      <h1>Documents Page Protected</h1>
     </div>
   );
 };

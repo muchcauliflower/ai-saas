@@ -14,7 +14,7 @@ const DocumentsPage = () => {
       <div className="flex justify-end p-4">
         <ModeToggle />
       </div>
-      <div className="h-full flex flex-col items-center justify-center space-y-4 mt-[-70px]">
+      <div className="h-full flex flex-col items-center justify-center space-y-4 -mt-17.5">
         <Image
           src="/document-empty.svg"
           height="300"

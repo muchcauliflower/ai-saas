@@ -5,9 +5,22 @@ import { useUser } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { toast } from "sonner";
 
 const DocumentsPage = () => {
   const { user } = useUser();
+  const create = useMutation(api.documents.create);
+  const onCreate = () => {
+    const promise = create({ title: "Untitiled" });
+
+    toast.promise(promise, {
+      loading: "Creating a new note...",
+      success: "New Note Created",
+      error: "Failed to create a new note",
+    });
+  };
 
   return (
     <div className="h-full">
@@ -32,7 +45,7 @@ const DocumentsPage = () => {
         <h2 className="text-lg font-medium">
           Welcome to {user?.firstName}&apos;s Documents Page!
         </h2>
-        <Button>
+        <Button onClick={onCreate}>
           <PlusCircle className="h-2 w-4 mr-2" />
           Create a note
         </Button>

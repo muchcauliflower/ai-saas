@@ -35,8 +35,7 @@ export const DocumentList = ({
   });
 
   const onRedirect = (documentId: string) => {
-    // same goes for this. Redirecting to 404 since feature to create the actual page does not exist yet. from item.tsx line 55
-    // router.push(`/document/${documentId}`);
+    router.push(`/document/${documentId}`);
   };
 
   if (documents === undefined) {
@@ -69,9 +68,8 @@ export const DocumentList = ({
         <div key={document._id}>
           <Item
             id={document._id}
-            // same goes for this as well. Redirecting to 404 since feature to create the actual page does not exist yet. from item.tsx line 55 and document-list.tsx line 38
-            // onClick={() => onRedirect(document._id)}
-            onClick={() => {}}
+            onClick={() => onRedirect(document._id)}
+            // onClick={() => {}}
             label={document.title}
             icon={FileIcon}
             documentIcon={document.icon}

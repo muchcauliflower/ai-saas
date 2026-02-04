@@ -16,7 +16,7 @@ import { FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { POST } from "@/app/api/conversation/route";
 import Empty from "@/components/empty";
 import Loader from "@/components/loader";
@@ -24,47 +24,29 @@ import { cn } from "@/lib/utils";
 import { UserAvatar } from "@clerk/nextjs";
 import BotAvatar from "@/components/bot-avatar";
 
-const ConversationPage = () => {
+const ImagePage = () => {
   const route = useRouter();
-  // If messages are from an API eg. OpenAI. The openAI libraru has a <ChatCompletionRequestMessage> method to handle the message
-  // Basically the method returns the same values of { role: string; content: string }
-  const [messages, setMessages] = React.useState<
-    Array<{ role: string; content: string }>
-  >([]);
+  const [images, setImages] = useState<string[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: { prompt: "" },
+    defaultValues: { prompt: "", amount: "1", resolution: "512x512" },
   });
 
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const userMessage: { role: string; content: string } = {
-        role: "user",
-        content: values.prompt,
-      };
-      const newMessages = [...messages, userMessage];
-      setMessages((prev) => [...prev, userMessage]);
+      setImages([]);
 
       // calling api route
-      const response = await fetch("/api/conversation", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: newMessages }),
-      });
+      const response = await fetch("/api/conversation");
 
       if (!response.ok) {
         throw new Error("Failed to get response");
       }
 
       const data = await response.json();
-
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: data.message.content },
-      ]);
     } catch (error: any) {
       // TODO: Open pro modal
       console.log(error);
@@ -76,7 +58,7 @@ const ConversationPage = () => {
   return (
     <div>
       <Heading
-        title="Conversation"
+        title="Image Generation"
         description="Our most advanced Gyrau Model."
         icon={MessageSquare}
         iconColor="text-violet-500"
@@ -117,33 +99,18 @@ const ConversationPage = () => {
         </div>
         <div className="space-y-4 mt-4">
           {isLoading && (
-            <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
+            <div className="p-20">
               <Loader />
             </div>
           )}
-          {messages.length === 0 && !isLoading && (
-            <Empty label="Generate a conversation!" />
+          {images.length === 0 && !isLoading && (
+            <Empty label="Generate an Image!" />
           )}
-          <div className="flex flex-col-reverse gap-y-4">
-            {messages.map((message) => (
-              <div
-                key={message.content}
-                className={cn(
-                  "p-8 w-full flex items-start gap-x-8 rounded-lg",
-                  message.role === "user"
-                    ? "bg-white border border-black/10"
-                    : "bg-muted"
-                )}
-              >
-                {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-                <p className="text-sm">{message.content}</p>
-              </div>
-            ))}
-          </div>
+          <div>Images will be rendered here</div>
         </div>
       </div>
     </div>
   );
 };
 
-export default ConversationPage;
+export default ImagePage;

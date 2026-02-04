@@ -7,8 +7,8 @@
 // import axios from "axios";
 import * as z from "zod";
 import { Heading } from "@/components/heading";
-import { MessageSquare } from "lucide-react";
-import { Form, FormProvider, useForm } from "react-hook-form";
+import { Code } from "lucide-react";
+import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { formSchema } from "./constants";
@@ -17,14 +17,17 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { POST } from "@/app/api/conversation/route";
+// import { POST } from "@/app/api/conversation/route";
 import Empty from "@/components/empty";
 import Loader from "@/components/loader";
 import { cn } from "@/lib/utils";
 import { UserAvatar } from "@clerk/nextjs";
 import BotAvatar from "@/components/bot-avatar";
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-const ConversationPage = () => {
+const CodePage = () => {
   const route = useRouter();
   // If messages are from an API eg. OpenAI. The openAI libraru has a <ChatCompletionRequestMessage> method to handle the message
   // Basically the method returns the same values of { role: string; content: string }
@@ -49,7 +52,8 @@ const ConversationPage = () => {
       setMessages((prev) => [...prev, userMessage]);
 
       // calling api route
-      const response = await fetch("/api/conversation", {
+      // calling /api/code/route.tsx instead
+      const response = await fetch("/api/code", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: newMessages }),
@@ -76,9 +80,9 @@ const ConversationPage = () => {
   return (
     <div>
       <Heading
-        title="Conversation"
-        description="Our most advanced Gyrau Model."
-        icon={MessageSquare}
+        title="Code Generation"
+        description="Generate code using descriptive text."
+        icon={Code}
         iconColor="text-violet-500"
         bgColor="bg-violet-500/10"
       />
@@ -99,7 +103,7 @@ const ConversationPage = () => {
                       <Input
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
-                        placeholder="Who is Ado?"
+                        placeholder="What is a for loop?"
                         {...field}
                       />
                     </FormControl>
@@ -116,14 +120,16 @@ const ConversationPage = () => {
           </FormProvider>
         </div>
         <div className="space-y-4 mt-4">
-          {isLoading && (
-            <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
-              <Loader />
-            </div>
-          )}
-          {messages.length === 0 && !isLoading && (
-            <Empty label="Generate a conversation!" />
-          )}
+          <div className="flex flex-col">
+            {isLoading && (
+              <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
+                <Loader />
+              </div>
+            )}
+            {messages.length === 0 && !isLoading && (
+              <Empty label="Generate a conversation!" />
+            )}
+          </div>
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message) => (
               <div
@@ -136,7 +142,27 @@ const ConversationPage = () => {
                 )}
               >
                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-                <p className="text-sm">{message.content}</p>
+                <div className="text-sm overflow-hidden leading-7">
+                  <ReactMarkdown
+                    components={{
+                      pre: ({ node, ...props }) => (
+                        <div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">
+                          <pre {...props} />
+                        </div>
+                      ),
+                      code: ({ node, ...props }) => {
+                        return (
+                          <code
+                            className="bg-black/10 rounded-lg p-1"
+                            {...props}
+                          />
+                        );
+                      },
+                    }}
+                  >
+                    {message.content || ""}
+                  </ReactMarkdown>
+                </div>
               </div>
             ))}
           </div>
@@ -146,4 +172,4 @@ const ConversationPage = () => {
   );
 };
 
-export default ConversationPage;
+export default CodePage;

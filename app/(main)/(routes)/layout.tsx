@@ -10,6 +10,6 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     return redirect("/");
   }
 
-  return <div>{children}</div>;
+  return <div className="h-full">{children}</div>;
 };
 export default MainLayout;

@@ -1,5 +1,5 @@
 "use client";
-import { Navigation } from "@/components/navigation";
+import { Navigation } from "@/app/_components/navigation";
 import { Spinner } from "@/components/spinner";
 import { SearchCommand } from "@/components/ui/search-command";
 import { useConvexAuth } from "convex/react";

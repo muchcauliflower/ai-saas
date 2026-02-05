@@ -14,7 +14,7 @@ import { toast } from "sonner";
 
 import { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from "../../components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import {
   DropdownMenu,
@@ -22,7 +22,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "./ui/dropdown-menu";
+} from "../../components/ui/dropdown-menu";
 import { useUser } from "@clerk/clerk-react";
 
 interface ItemProps {
@@ -82,8 +82,7 @@ export const Item = ({
         if (!expanded) {
           onExpand?.();
         }
-        // shoes 404 page since no feature to have the actual document
-        // router.push(`/documents/${documentId}`);
+        router.push(`/documents/${documentId}`);
       },
     );
 

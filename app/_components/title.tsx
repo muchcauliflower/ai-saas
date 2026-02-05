@@ -74,8 +74,6 @@ export const Title = ({ initialData }: TitleProps) => {
       )}
     </div>
   );
-
-  return <div>Title</div>;
 };
 
 Title.Skeleton = function TitleSkeleton() {

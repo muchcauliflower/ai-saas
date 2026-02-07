@@ -6,6 +6,7 @@ import { ImageIcon, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useCoverImage } from "@/hooks/use-cover-image";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface CoverImageProps {
     url?: string;
@@ -46,5 +47,11 @@ export const Cover = ({
                 </div>
             )}
         </div>
+    )
+}
+
+Cover.Skeleton = function CoverSkeleton() {
+    return(
+        <Skeleton className="w-full h-[12vh]"/>
     )
 }

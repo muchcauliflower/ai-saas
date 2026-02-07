@@ -73,9 +73,9 @@ export const Toolbar = ({
     }
 
     return(
-        <div className="pl-13.5 group relative">
+        <div className="pl-13.5 group relative flex">
             {!!initialData && !preview && (
-                <div className="flex items-center gap-x-2 group/icon pt-6">
+                <div className="flex items-center justify-center gap-x-2 group/icon py-3">
                     <IconPicker onChange={onIconSelect}>
                         <p className="text-6xl hover:opacity-75 transition">
                             {initialData.icon}
@@ -96,7 +96,7 @@ export const Toolbar = ({
                     {initialData.icon}
                 </p>
             )}
-            <div className="opacity-0 group-hover:opacity-100 flex items-center gap-x-1 py-4">
+            <div className="opacity-0 group-hover:opacity-100 flex items-center gap-x-1 py-4 justify-center">
                 {!initialData.icon && !preview && (
                     <IconPicker asChild onChange={onIconSelect}>
                         <Button
@@ -128,12 +128,12 @@ export const Toolbar = ({
                     onKeyDown={onKeyDown}
                     value={value}
                     onChange={(e) => onInput(e.target.value)}
-                    className="text-5xl bg-transparent font-bold wrap-break-word outline-none text-[#3F3F3F] dark:text-[#CFCFCF] resize-none"
+                    className="text-5xl bg-transparent font-bold wrap-break-word outline-none text-[#3F3F3F] dark:text-[#CFCFCF] h-full resize-none flex justify-center pt-[17.25]"
                 />
             ) : (
                 <div
                     onClick={enableInput}
-                    className="pb-[11.5px] text-5xl font-bold wrap-break-word outline-none text-[#3F3F3F] dark:text-[#CFCFCF]"
+                    className="py-[5.25px] text-5xl font-bold wrap-break-word outline-none text-[#3F3F3F] dark:text-[#CFCFCF] flex justify-center items-center"
                 >
                     {initialData.title}
                 </div>

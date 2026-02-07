@@ -10,6 +10,7 @@ import { useParams } from "next/navigation";
 import { Title } from "./title";
 import { Banner } from "./banner";
 import { Menu } from "./menu";
+import EditorToolbar from "@/components/editor-toolbar";
 
 interface NavBarProps {
   isCollapsed: boolean;
@@ -56,6 +57,7 @@ export const NavBar = ({ isCollapsed, onResetWidth }: NavBarProps) => {
         </div>
       </nav>
       {document.isArchived && <Banner documentId={document._id} />}
+      <EditorToolbar />
     </>
   );
 };

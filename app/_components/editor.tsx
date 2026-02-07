@@ -1,0 +1,26 @@
+"use client"
+
+import { useEditor, EditorContent} from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit';
+
+export default function Editor() {
+    const editor = useEditor({
+        extensions: [
+            StarterKit,
+        ],
+        content: '<p>Hello world </p>',
+        immediatelyRender: false,
+        editorProps: {
+            attributes: {
+                class: 'prose max-w-pone focus-outline-none'
+            }
+        }
+    })
+
+    if (!editor) return null
+    return (
+        <div className="border rounded-md p-4">
+            <EditorContent editor={editor} />
+        </div>
+    )
+}

@@ -128,7 +128,7 @@ export const Toolbar = ({
                     onKeyDown={onKeyDown}
                     value={value}
                     onChange={(e) => onInput(e.target.value)}
-                    className="text-5xl bg-transparent font-bold wrap-break-word outline-none text-[#3F3F3F] dark:text-[#CFCFCF] h-full resize-none flex justify-center pt-[17.25] pl-20"
+                    className="text-5xl bg-transparent font-bold wrap-break-word outline-none text-[#3F3F3F] dark:text-[#CFCFCF] h-full resize-none flex justify-center pt-[17.25] pl-5"
                 />
             ) : (
                 <div

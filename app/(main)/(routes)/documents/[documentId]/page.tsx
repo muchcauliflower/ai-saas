@@ -8,6 +8,7 @@ import { api } from "@/convex/_generated/api"
 import { Id } from "@/convex/_generated/dataModel";
 import { useQuery } from "convex/react";
 import React from "react";
+import { useEditorContext } from "@/app/contexts/editor-contexts";
 
 interface DocumentIdPageProps {
   params: Promise<{
@@ -19,11 +20,31 @@ const DocumentIdPage = ({
   params
 }: DocumentIdPageProps) => {
   const { documentId } = React.use(params);
+  const { editor } = useEditorContext();
 
   const document = useQuery(api.documents.getById, {
     documentId
   });
-  
+
+  // Sync document content to editor when it loads or changes
+  React.useEffect(() => {
+    if (!editor || editor.isDestroyed) return;
+
+    if (!document?.content) {
+      editor.commands.setContent("<p>Start Typing...</p>");
+      return;
+    }
+
+    const currentContent = editor.getHTML();
+    
+    if (document?.content && editor && !editor.isDestroyed) {
+      const currentContent = editor.getHTML();
+      // Only update if content is different to avoid cursor jumping
+      if (currentContent !== document.content) {
+        editor.commands.setContent(document.content);
+      }
+    }
+  }, [document?.content, editor]);
   
   if (document === undefined) {
     return (
@@ -52,7 +73,9 @@ const DocumentIdPage = ({
         <Toolbar initialData={document} />
       </div>
       <div className="p-3">
-      <Editor />
+        <div className="pb-40">
+          <Editor documentId={documentId} />
+        </div>
       </div>
     </div>
   );

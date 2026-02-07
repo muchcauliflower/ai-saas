@@ -1,10 +1,50 @@
+"use client";
+
+import { BoldIcon, ChevronUp, Code, ItalicIcon, LinkIcon, List, ListOrdered } from 'lucide-react'
+
 import { Toolbar, ToolbarGroup, ToolbarSeparator } from '@/components/tiptap-ui-primitive/toolbar'
 import { Button } from './ui/button'
-import { BoldIcon, ChevronUp, Code, ItalicIcon, LinkIcon, List, ListOrdered } from 'lucide-react'
 import { Spacer } from "@/components/tiptap-ui-primitive/spacer";
+
+import { useParams } from 'next/navigation';
+
+import { useMutation } from 'convex/react';
+import { api } from '@/convex/_generated/api';
+import { Id } from '@/convex/_generated/dataModel';
+
+import { useEditorContext } from '@/app/contexts/editor-contexts';
+
+import { toast } from 'sonner';
 
 
 export default function EditorToolbar() {
+  const { editor } = useEditorContext();
+  const params = useParams();
+  const update = useMutation(api.documents.update);
+
+  if (!editor) return null;
+
+  const handleSave = async () => {
+    const content = editor.getHTML();
+    const loadingToast = toast.loading('Saving...');
+
+    try {
+      await update({
+        id: params.documentId as Id<"documents">,
+        content: content,
+      });
+
+      toast.success('Document saved!', {
+        id: loadingToast,
+      });
+    } catch (error) {
+      toast.error('Failed to save document', {
+        id: loadingToast,
+      });
+      console.error('Save error:', error);
+    }
+  }
+
   return (
     <div className='flex justify-center w-full'>
       <Toolbar 
@@ -51,7 +91,11 @@ export default function EditorToolbar() {
         <ToolbarSeparator />
 
         <ToolbarGroup>
-          <Button data-style="primary">Save</Button>
+          <Button
+          data-style="primary"
+          onClick={handleSave}>
+            Save
+          </Button>
         </ToolbarGroup>
 
         <ToolbarSeparator />

@@ -24,10 +24,12 @@ export const CoverImageModal = () => {
     const coverImage = useCoverImage();
     const { edgestore } = useEdgeStore();
 
-    // Fetch the current document to check if it has a cover image
-    const document = useQuery(api.documents.getById, {
-        documentId: params.documentId as Id<"documents">
-    });
+    const document = useQuery(
+        api.documents.getById,
+        params.documentId
+            ? { documentId: params.documentId as Id<"documents"> }
+            : "skip"
+        );
 
     const [file, setFile] = useState<File>();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -92,7 +94,7 @@ export const CoverImageModal = () => {
             // Update document to remove cover image
             await update({
                 id: params.documentId as Id<"documents">,
-                coverImage: undefined
+                coverImage: ""  // Use empty string instead of undefined
             });
 
             onClose();

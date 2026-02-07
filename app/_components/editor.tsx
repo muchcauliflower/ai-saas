@@ -12,14 +12,15 @@ export default function Editor() {
         immediatelyRender: false,
         editorProps: {
             attributes: {
-                class: 'prose max-w-pone focus-outline-none'
+                class: 'prose prose-sm sm:prose-base lg:prose-lg max-w-none focus:outline-none min-h-[200px] p-4',
+                spellcheck: 'false',
             }
         }
     })
 
     if (!editor) return null
     return (
-        <div className="border rounded-md p-4">
+        <div className="rounded-md pl-13.5">
             <EditorContent editor={editor} />
         </div>
     )

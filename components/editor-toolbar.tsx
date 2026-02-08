@@ -15,14 +15,18 @@ import { Id } from '@/convex/_generated/dataModel';
 import { useEditorContext } from '@/app/contexts/editor-contexts';
 
 import { toast } from 'sonner';
+import { useState } from 'react';
+import { motion } from 'motion/react';
 
 
 export default function EditorToolbar() {
-  const { editor } = useEditorContext();
+  const { editor, hidden, toggleToolbar } = useEditorContext();
+
   const params = useParams();
   const update = useMutation(api.documents.update);
 
   if (!editor) return null;
+
 
   const handleSave = async () => {
     const content = editor.getHTML();
@@ -46,67 +50,82 @@ export default function EditorToolbar() {
   }
 
   return (
-    <div className='flex justify-center w-full'>
-      <Toolbar 
-        variant="floating"
-        className='h-16 w-full'
-      >
-        <ToolbarGroup>
-          <Button data-style="ghost">
-            <BoldIcon className="tiptap-button-icon" />
-            Bold
-          </Button>
-          <Button data-style="ghost">
-            <ItalicIcon className="tiptap-button-icon" />
-            Italic
-          </Button>
-        </ToolbarGroup>
+    <div className='w-full flex items-center justify-center'>
+      <div className='mt-5 flex items-center justify-between px-5 w-[55rem]'>
+        {/* left */}
+        <div className='flex justify-center'>
+          {!hidden && (
+            <Toolbar 
+              variant="floating"
+            >
+              <>
+                <ToolbarGroup>
+                  <Button data-style="ghost">
+                    <BoldIcon className="tiptap-button-icon" />
+                    Bold
+                  </Button>
+                  <Button data-style="ghost">
+                    <ItalicIcon className="tiptap-button-icon" />
+                    Italic
+                  </Button>
+                </ToolbarGroup>
 
-        <ToolbarSeparator />
+                <ToolbarSeparator />
 
-        <ToolbarGroup>
-          <Button data-style="ghost">
-            <LinkIcon className="tiptap-button-icon" />
-            Link
-          </Button>
-          <Button data-style="ghost">
-            <Code className="tiptap-button-icon" />
-            Code
-          </Button>
-        </ToolbarGroup>
+                <ToolbarGroup>
+                  <Button data-style="ghost">
+                    <LinkIcon className="tiptap-button-icon" />
+                    Link
+                  </Button>
+                  <Button data-style="ghost">
+                    <Code className="tiptap-button-icon" />
+                    Code
+                  </Button>
+                </ToolbarGroup>
 
-        <ToolbarSeparator />
+                <ToolbarSeparator />
 
-        <ToolbarGroup>
-          <Button data-style="ghost">
-            <List className="tiptap-button-icon" />
-            Bulleted List
-          </Button>
-          <Button data-style="ghost">
-            <ListOrdered className="tiptap-button-icon" />
-            Ordered List
-          </Button>
-        </ToolbarGroup>
+                <ToolbarGroup>
+                  <Button data-style="ghost">
+                    <List className="tiptap-button-icon" />
+                    Bulleted List
+                  </Button>
+                  <Button data-style="ghost">
+                    <ListOrdered className="tiptap-button-icon" />
+                    Ordered List
+                  </Button>
+                </ToolbarGroup>
 
-        <ToolbarSeparator />
+                <ToolbarSeparator />
 
-        <ToolbarGroup>
-          <Button
-          data-style="primary"
-          onClick={handleSave}>
-            Save
-          </Button>
-        </ToolbarGroup>
+                <ToolbarGroup>
+                  <Button
+                  data-style="primary"
+                  onClick={handleSave}>
+                    Save
+                  </Button>
+                </ToolbarGroup>
 
-        <ToolbarSeparator />
-
-        <ToolbarGroup>
-          <Button data-style="primary">
-            <ChevronUp className="tiptap-button-icon" />
-          </Button>
-        </ToolbarGroup>
-
-      </Toolbar>
+                <ToolbarSeparator />
+              </>
+            </Toolbar>
+            )}
+        </div>
+        {/* right */}
+        <div>
+          <Toolbar variant="floating">
+            <ToolbarGroup>
+              <Button
+              onClick={toggleToolbar}
+              role="button"
+              data-style="primary"
+              >
+                <ChevronUp className="tiptap-button-icon" />
+              </Button>
+            </ToolbarGroup>
+          </Toolbar>
+        </div>
+      </div>
     </div>
   )
 }

@@ -67,7 +67,6 @@
   }
 
   &[data-variant="floating"] {
-    margin-top: 1rem;
     width: fit-content;
     max-width: calc(100vw - 2rem);
     --tt-toolbar-padding: 0.125rem;

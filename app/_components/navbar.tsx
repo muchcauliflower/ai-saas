@@ -12,6 +12,8 @@ import { Banner } from "./banner";
 import { Menu } from "./menu";
 import EditorToolbar from "@/components/editor-toolbar";
 
+
+
 interface NavBarProps {
   isCollapsed: boolean;
   onResetWidth: () => void;

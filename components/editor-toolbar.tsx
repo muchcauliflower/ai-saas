@@ -123,7 +123,7 @@ export default function EditorToolbar() {
         <motion.div
           className="relative z-10"
           animate={{ 
-            opacity: hidden ? 0.008 : 1,
+            opacity: hidden ? 0.0009 : 1,
             x: hidden ? -375 : -10
           }}
           whileHover={{ opacity: 1 }}
@@ -140,7 +140,7 @@ export default function EditorToolbar() {
               </Button>
             </ToolbarGroup>
           </Toolbar>
-</motion.div>
+        </motion.div>
       </div>
     </div>
   )

@@ -21,7 +21,7 @@ export const Cover = ({
 
     return(
         <div className={cn(
-            "relative w-full h-[35vh] group",
+            "relative w-full h-[40vh] group",
             !url && 'h-[12vh]',
             url && "bg-muted"
         )}>

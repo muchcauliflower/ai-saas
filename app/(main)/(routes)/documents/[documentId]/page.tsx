@@ -67,7 +67,7 @@ const DocumentIdPage = ({
   }
 
   return (
-    <div className="pb-40">
+    <div className="pb-40 mt-5">
       <Cover url={document.coverImage}/>
       <div className="md:max-w-3xl lg:max-w-4xl mx-4.5">
         <Toolbar initialData={document} />

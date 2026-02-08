@@ -75,21 +75,22 @@ export const Toolbar = ({
 
     return(
         <div className="pl-13 group relative flex mt-5">
-            {!!initialData && !preview && (
-                <div className="flex items-center justify-center group/icon py-3 gap-x-3">
-                    <IconPicker onChange={onIconSelect}>
-                        <p className="text-6xl hover:opacity-75 transition">
-                            {initialData.icon}
-                        </p>
-                    </IconPicker>
-                    <Button
-                        onClick={onRemoveIcon}
-                        className="rounded-full opacity-0 group-hover/icon:opacity-100 transition text-muted-foreground text-xs"
-                        variant="outline"
-                        size="icon"
-                    >
-                        <X className="h-4 w-4"/>
-                    </Button>
+            {!!initialData.icon && !preview && (
+                <div className="flex items-center justify-center group/icon py-3 pr-3">
+                <IconPicker onChange={onIconSelect}>
+                    <p className="text-6xl hover:opacity-75 transition">
+                    {initialData.icon}
+                    </p>
+                </IconPicker>
+
+                <Button
+                    onClick={onRemoveIcon}
+                    className="rounded-full opacity-0 group-hover/icon:opacity-100 transition text-muted-foreground text-xs"
+                    variant="outline"
+                    size="icon"
+                >
+                    <X className="h-4 w-4" />
+                </Button>
                 </div>
             )}
             {!!initialData.icon && preview && (
@@ -97,7 +98,7 @@ export const Toolbar = ({
                     {initialData.icon}
                 </p>
             )}
-            <div className="opacity-100 group-hover:opacity-100 flex items-center gap-x-1 py-4 justify-center">
+            <div className="opacity-100 group-hover:opacity-100 flex items-center gap-x-3 py-4 justify-center">
                 {!initialData.icon && !preview && (
                     <IconPicker asChild onChange={onIconSelect}>
                         <Button

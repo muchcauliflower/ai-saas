@@ -15,7 +15,7 @@ export const Heading = () => {
         Jotion is the connected workspace where <br />
         better, faster work happens.
       </h3>
-      <Link href="/dashboard">
+      <Link href="/documents">
         <Button>
           Enter Jotion
           <ArrowRight className="h-4 w-4 ml-2" />

@@ -19,10 +19,6 @@ export default function Editor({
     return (
         <div className="rounded-md pl-13.5">
             <EditorContent editor={editor} />
-
-            <Button onClick={toggleToolbar} role='button'>
-                test
-            </Button>
         </div>
     )
 }

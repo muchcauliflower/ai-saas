@@ -15,8 +15,7 @@ import { Id } from '@/convex/_generated/dataModel';
 import { useEditorContext } from '@/app/contexts/editor-contexts';
 
 import { toast } from 'sonner';
-import { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 
 
 export default function EditorToolbar() {
@@ -51,80 +50,97 @@ export default function EditorToolbar() {
 
   return (
     <div className='w-full flex items-center justify-center'>
-      <div className='mt-5 flex items-center justify-between px-5 w-[55rem]'>
+      <div className={`relative flex items-center justify-between w-[51rem] h-[6rem] rounded-xl`}>
         {/* left */}
-        <div className='flex justify-center'>
-          {!hidden && (
-            <Toolbar 
-              variant="floating"
-            >
-              <>
-                <ToolbarGroup>
-                  <Button data-style="ghost">
-                    <BoldIcon className="tiptap-button-icon" />
-                    Bold
-                  </Button>
-                  <Button data-style="ghost">
-                    <ItalicIcon className="tiptap-button-icon" />
-                    Italic
-                  </Button>
-                </ToolbarGroup>
+        <div className='relative z-0'>
+          <AnimatePresence>
+            {!hidden && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+              >
+                <Toolbar 
+                  variant="floating"
+                >
+                  <>
+                    <ToolbarGroup>
+                      <Button data-style="ghost">
+                        <BoldIcon className="tiptap-button-icon" />
+                        Bold
+                      </Button>
+                      <Button data-style="ghost">
+                        <ItalicIcon className="tiptap-button-icon" />
+                        Italic
+                      </Button>
+                    </ToolbarGroup>
 
-                <ToolbarSeparator />
+                    <ToolbarSeparator />
 
-                <ToolbarGroup>
-                  <Button data-style="ghost">
-                    <LinkIcon className="tiptap-button-icon" />
-                    Link
-                  </Button>
-                  <Button data-style="ghost">
-                    <Code className="tiptap-button-icon" />
-                    Code
-                  </Button>
-                </ToolbarGroup>
+                    <ToolbarGroup>
+                      <Button data-style="ghost">
+                        <LinkIcon className="tiptap-button-icon" />
+                        Link
+                      </Button>
+                      <Button data-style="ghost">
+                        <Code className="tiptap-button-icon" />
+                        Code
+                      </Button>
+                    </ToolbarGroup>
 
-                <ToolbarSeparator />
+                    <ToolbarSeparator />
 
-                <ToolbarGroup>
-                  <Button data-style="ghost">
-                    <List className="tiptap-button-icon" />
-                    Bulleted List
-                  </Button>
-                  <Button data-style="ghost">
-                    <ListOrdered className="tiptap-button-icon" />
-                    Ordered List
-                  </Button>
-                </ToolbarGroup>
+                    <ToolbarGroup>
+                      <Button data-style="ghost">
+                        <List className="tiptap-button-icon" />
+                        Bulleted List
+                      </Button>
+                      <Button data-style="ghost">
+                        <ListOrdered className="tiptap-button-icon" />
+                        Ordered List
+                      </Button>
+                    </ToolbarGroup>
 
-                <ToolbarSeparator />
+                    <ToolbarSeparator />
 
-                <ToolbarGroup>
-                  <Button
-                  data-style="primary"
-                  onClick={handleSave}>
-                    Save
-                  </Button>
-                </ToolbarGroup>
-
-                <ToolbarSeparator />
-              </>
-            </Toolbar>
+                    <ToolbarGroup>
+                      <Button
+                        data-style="primary"
+                        onClick={handleSave}
+                      >
+                        Save
+                      </Button>
+                    </ToolbarGroup>
+                  </>
+                </Toolbar>
+              </motion.div>
             )}
+          </AnimatePresence>
         </div>
+
         {/* right */}
-        <div>
+        <motion.div
+          className="relative z-10"
+          animate={{ 
+            opacity: hidden ? 0.008 : 1,
+            x: hidden ? -375 : -10
+          }}
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+        >
           <Toolbar variant="floating">
             <ToolbarGroup>
               <Button
-              onClick={toggleToolbar}
-              role="button"
-              data-style="primary"
+                onClick={toggleToolbar}
+                role="button"
+                data-style="primary"
               >
                 <ChevronUp className="tiptap-button-icon" />
               </Button>
             </ToolbarGroup>
           </Toolbar>
-        </div>
+</motion.div>
       </div>
     </div>
   )

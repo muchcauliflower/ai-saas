@@ -21,6 +21,7 @@ export const Toolbar = ({
     initialData,
     preview
 }: ToolbarProps) => {
+    const [x, setX] = useState(0)
     const inputRef = useRef<HTMLTextAreaElement | null>(null);
     const [isEditing, setIsEditing] = useState(false);
     const [value, setValue] = useState(initialData.title);
@@ -128,7 +129,7 @@ export const Toolbar = ({
                     onKeyDown={onKeyDown}
                     value={value}
                     onChange={(e) => onInput(e.target.value)}
-                    className="text-5xl bg-transparent font-bold wrap-break-word outline-none text-[#3F3F3F] dark:text-[#CFCFCF] h-full resize-none flex justify-center pt-[17.25] pl-5"
+                    className="text-5xl bg-transparent font-bold wrap-break-word outline-none text-[#3F3F3F] dark:text-[#CFCFCF] h-full resize-none flex justify-center pt-[17.25] pl-6"
                 />
             ) : (
                 <div

@@ -10,7 +10,9 @@ import { useParams } from "next/navigation";
 import { Title } from "./title";
 import { Banner } from "./banner";
 import { Menu } from "./menu";
-import EditorToolbar from "@/components/editor-toolbar";
+
+import { FixedToolbar } from "@/components/fixed-toolbar";
+import { ModeToggle } from "@/components/mode-toggle";
 
 
 
@@ -43,7 +45,7 @@ export const NavBar = ({ isCollapsed, onResetWidth }: NavBarProps) => {
 
   return (
     <>
-      <nav className="bg-background dark:bg-[#1F1F1F] px-3 py-2 w-full flex items-center gap-x-4">
+      <nav className="bg-background dark:bg-[#1F1F1F] px-3 py-3 w-full flex items-center gap-x-4">
         {isCollapsed && (
           <MenuIcon
             role="button"
@@ -53,13 +55,14 @@ export const NavBar = ({ isCollapsed, onResetWidth }: NavBarProps) => {
         )}
         <div className="flex items-center justify-between w-full">
           <Title initialData={document} />
-          <div className="flex items-center justify-between w-full">
+          <FixedToolbar />
+          <ModeToggle />
+          <div className="flex items-center justify-between w-auto">
             <Menu documentId={document._id} />
           </div>
         </div>
       </nav>
       {document.isArchived && <Banner documentId={document._id} />}
-      <EditorToolbar />
     </>
   );
 };

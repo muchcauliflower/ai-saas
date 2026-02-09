@@ -5,6 +5,13 @@ import { BoldIcon, ChevronUp, Code, ItalicIcon, LinkIcon, List, ListOrdered } fr
 import { Toolbar, ToolbarGroup, ToolbarSeparator } from '@/components/tiptap-ui-primitive/toolbar'
 import { Button } from './ui/button'
 import { Spacer } from "@/components/tiptap-ui-primitive/spacer";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+} from '@/components/tiptap-ui-primitive/dropdown-menu'
 
 import { useParams } from 'next/navigation';
 
@@ -18,7 +25,7 @@ import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'motion/react';
 
 
-export default function EditorToolbar() {
+export default function FloatingToolBar() {
   const { editor, hidden, toggleToolbar } = useEditorContext();
 
   const params = useParams();
@@ -50,7 +57,7 @@ export default function EditorToolbar() {
 
   return (
     <div className='w-full flex items-center justify-center'>
-      <div className={`relative flex items-center justify-between w-[51rem] h-[6rem] rounded-xl`}>
+      <div className={`relative flex items-center justify-between w-full h-[6rem] rounded-xl`}>
         {/* left */}
         <div className='relative z-0'>
           <AnimatePresence>
@@ -65,6 +72,54 @@ export default function EditorToolbar() {
                   variant="floating"
                 >
                   <>
+                    {/* Dropdown menu for header */}
+                    <ToolbarGroup>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button data-style="ghost">Headings</Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent
+                        align="start"
+                        className="w-[var(--radix-dropdown-menu-trigger-width)] p-0 pt-3"
+                        >
+                          <DropdownMenuGroup className='flex flex-col gap-y-3'>
+                            <DropdownMenuItem asChild>
+                              <Button data-style="ghost" onClick={() => console.log('Item 1')}>
+                                Heading 1
+                              </Button>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                              <Button data-style="ghost" onClick={() => console.log('Item 2')}>
+                                Heading 2
+                              </Button>
+                            </DropdownMenuItem>
+                                                      <DropdownMenuItem asChild>
+                              <Button data-style="ghost" onClick={() => console.log('Item 3')}>
+                                Heading 3
+                              </Button>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                              <Button data-style="ghost" onClick={() => console.log('Item 4')}>
+                                Heading 4
+                              </Button>
+                            </DropdownMenuItem>
+                                                      <DropdownMenuItem asChild>
+                              <Button data-style="ghost" onClick={() => console.log('Item 5')}>
+                                Heading 5
+                              </Button>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                              <Button data-style="ghost" onClick={() => console.log('Item 6')}>
+                                Heading 6
+                              </Button>
+                            </DropdownMenuItem>
+                          </DropdownMenuGroup>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </ToolbarGroup>
+
+                    <ToolbarSeparator />
+
                     <ToolbarGroup>
                       <Button data-style="ghost">
                         <BoldIcon className="tiptap-button-icon" />

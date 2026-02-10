@@ -98,10 +98,6 @@ export const FixedToolbar = () =>{
                 <ToolbarSeparator />
 
                 <ToolbarGroup>
-                    <Button onClick={() => {}} className="btn-clear" variant="clear">
-                        <LinkIcon className="tiptap-button-icon" />
-                        Link
-                    </Button>
                     <Button
                     onClick={() => editor.chain().focus().toggleCodeBlock().run()}
                     className="btn-clear" variant="clear"

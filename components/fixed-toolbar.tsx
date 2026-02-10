@@ -9,7 +9,6 @@ import { useEditorContext } from "@/app/contexts/editor-contexts";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "./tiptap-ui-primitive/dropdown-menu/dropdown-menu";
 import { Toolbar, ToolbarGroup, ToolbarSeparator } from "./tiptap-ui-primitive/toolbar/toolbar";
 
-
 import { useParams } from "next/navigation";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
@@ -51,9 +50,9 @@ export const FixedToolbar = () =>{
             <Toolbar className="flex justify-center">
                 <ToolbarGroup>
                     <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="clear">Headings</Button>
-                    </DropdownMenuTrigger>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="clear">Headings</Button>
+                        </DropdownMenuTrigger>
                     <DropdownMenuContent
                     align="start"
                     className="w-[calc(var(--radix-dropdown-menu-trigger-width)+20px)] p-0 pt-6"
@@ -63,33 +62,18 @@ export const FixedToolbar = () =>{
                         >
                             <DropdownMenuGroup className='flex flex-col gap-y-3 pr-[8px]'>
                                 <DropdownMenuItem asChild>
-                                    <Button onClick={() => console.log('Item 1')}>
+                                    <Button onClick={() => editor.chain().focus().toggleHeading({level: 1}).run()}>
                                     Heading 1
                                     </Button>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem asChild>
-                                    <Button onClick={() => console.log('Item 2')}>
+                                    <Button onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}>
                                     Heading 2
                                     </Button>
                                 </DropdownMenuItem>
-                                    <DropdownMenuItem asChild>
-                                    <Button onClick={() => console.log('Item 3')}>
+                                <DropdownMenuItem asChild>
+                                    <Button onClick={() => editor.chain().focus().toggleHeading({level: 3}).run()}>
                                     Heading 3
-                                    </Button>
-                                </DropdownMenuItem>
-                                <DropdownMenuItem asChild>
-                                    <Button onClick={() => console.log('Item 4')}>
-                                    Heading 4
-                                    </Button>
-                                </DropdownMenuItem>
-                                    <DropdownMenuItem asChild>
-                                    <Button onClick={() => console.log('Item 5')}>
-                                    Heading 5
-                                    </Button>
-                                </DropdownMenuItem>
-                                <DropdownMenuItem asChild>
-                                    <Button onClick={() => console.log('Item 6')}>
-                                    Heading 6
                                     </Button>
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>
@@ -101,40 +85,58 @@ export const FixedToolbar = () =>{
                 <ToolbarSeparator />
 
                 <ToolbarGroup>
-                    <Button className="btn-clear" variant="clear">
-                    <BoldIcon className="tiptap-button-icon" />
-                    Bold
+                    <Button onClick={() => editor.chain().focus().toggleBold().run()} className="btn-clear" variant="clear">
+                        <BoldIcon className="tiptap-button-icon" />
+                        Bold
                     </Button>
                     <Button className="btn-clear" variant="clear">
-                    <ItalicIcon className="tiptap-button-icon" />
-                    Italic
-                    </Button>
-                </ToolbarGroup>
-
-                <ToolbarSeparator />
-
-                <ToolbarGroup>
-                    <Button className="btn-clear" variant="clear">
-                    <LinkIcon className="tiptap-button-icon" />
-                    Link
-                    </Button>
-                    <Button className="btn-clear" variant="clear">
-                    <Code className="tiptap-button-icon" />
-                    Code
+                        <ItalicIcon className="tiptap-button-icon" />
+                        Italic
                     </Button>
                 </ToolbarGroup>
 
                 <ToolbarSeparator />
 
                 <ToolbarGroup>
-                    <Button className="btn-clear" variant="clear">
-                    <List className="tiptap-button-icon" />
-                    Bulleted List
+                    <Button onClick={() => {}} className="btn-clear" variant="clear">
+                        <LinkIcon className="tiptap-button-icon" />
+                        Link
                     </Button>
-                    <Button className="btn-clear" variant="clear">
-                    <ListOrdered className="tiptap-button-icon" />
-                    Ordered List
+                    <Button
+                    onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+                    className="btn-clear" variant="clear"
+                    >
+                        <Code className="tiptap-button-icon" />
+                        Code Block
                     </Button>
+                    <Button
+                    onClick={() => editor.chain().focus().toggleCode().run()}
+                    className="btn-clear" variant="clear"
+                    >
+                        <Code className="tiptap-button-icon" />
+                        Code
+                    </Button>
+                </ToolbarGroup>
+
+                <ToolbarSeparator />
+
+                <ToolbarGroup>
+                    <Button
+                    onClick={() => editor.chain().focus().toggleBulletList().run()}
+                    className="btn-clear"
+                    variant="clear"
+                    >
+                        <List className="tiptap-button-icon" />
+                        Bulleted List
+                    </Button>
+                    <Button
+                    onClick={() => editor.chain().focus().toggleOrderedList().run()}
+                    className="btn-clear"
+                    variant="clear"
+                    >
+                        <ListOrdered className="tiptap-button-icon" />
+                        Ordered List
+                        </Button>
                 </ToolbarGroup>
 
                 <ToolbarSeparator />

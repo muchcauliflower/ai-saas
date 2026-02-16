@@ -25,7 +25,11 @@ import { Id } from "@/convex/_generated/dataModel";
 import { toast } from "sonner";
 import { createDropdownMenuScope } from "@radix-ui/react-dropdown-menu";
 
+import { uselmQuery } from "@/hooks/use-lm-query";
+
 export const FixedToolbar = () =>{
+    const lmQuery = uselmQuery();
+
     const { editor, hidden, toggleToolbar } = useEditorContext();
     
     const params = useParams();
@@ -184,11 +188,10 @@ export const FixedToolbar = () =>{
 
                     {/* AY AI */}
                     <Button
-                    onClick={() => {console.log("waw magik")}}
+                    onClick={() => lmQuery.isOpen ? lmQuery.onClose() : lmQuery.onOpen()}
                     className="btn-clear" variant="clear"
                     >
                         <Wand className="tiptap-button-icon" />
-                        Magik
                     </Button>
                 </ToolbarGroup>
             </Toolbar>

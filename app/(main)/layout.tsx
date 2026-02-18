@@ -9,6 +9,7 @@ import { EditorProvider } from "@/app/contexts/editor-contexts";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from '@tiptap/extension-link';
+import { ModalProvider } from "@/components/providers/model-provider";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
@@ -50,6 +51,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="h-full dark:bg-[#1F1F1F] flex">
         <SearchCommand />
         <Navigation />
+        <ModalProvider />
         <main className="flex-1 h-full overflow-y-auto">{children}</main>
       </div>
     </EditorProvider>

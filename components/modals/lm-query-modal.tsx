@@ -6,14 +6,44 @@ import { ChevronRight, Loader2 } from "lucide-react";
 import { uselmQuery } from "@/hooks/use-lm-query";
 import { useEditorContext } from "@/app/contexts/editor-contexts";
 import { toast } from "sonner";
+import Editor from "@/app/_components/editor";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import { Markdown } from "tiptap-markdown";
 
 export const LmModal = () => {
     const { editor } = useEditorContext();
     const lmQuery = uselmQuery();
 
     const [answer, setAnswer] = useState<string>("");
+
     const [query, setQuery] = useState<string>("");
     const [loading, setLoading] = useState(false);
+
+    // for AI's response
+    const AnswerView = ({ answer }: {answer: string}) => {
+        const editor = useEditor({
+            immediatelyRender: false,
+            extensions: [StarterKit, Markdown],
+            content: answer || "",
+            editable: false,
+            editorProps: {
+                attributes: {
+                    class: "prose prose-invert max-w-none text-sm focus:outline-none",
+                },
+            },
+        });
+
+        useEffect(() => {
+            if (editor && answer) {
+            editor.commands.setContent(answer);
+            }
+        }, [answer, editor]);
+
+        if (!editor) return null;
+        
+        return <EditorContent editor={editor} />
+    }
 
     // Debug logging
     useEffect(() => {
@@ -115,7 +145,7 @@ export const LmModal = () => {
                     )}
                     {answer && !loading && (
                         <div className="mt-4 p-3 bg-[#2a2a2a] rounded-md max-h-96 overflow-y-auto">
-                            <p className="text-sm whitespace-pre-wrap">{answer}</p>
+                            <AnswerView answer={answer} />
                         </div>
                     )}
                 </div>

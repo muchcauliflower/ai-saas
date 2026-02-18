@@ -49,6 +49,8 @@ export const LmModal = () => {
     const [query, setQuery] = useState<string>("");
     const [loading, setLoading] = useState(false);
 
+    const [addToEditor, setAddToEditor] = useState<boolean>(false);
+
     // Debug logging
     useEffect(() => {
         console.log("=== MODAL: isOpen ===", lmQuery.isOpen);
@@ -66,14 +68,14 @@ export const LmModal = () => {
 
     // Timer
     useEffect(() => {
-        let timer: number; // <- browser interval ID is a number
+        let timer: number;
 
         if (loading) {
-            setSeconds(0); // reset
+            setSeconds(0);
             timer = window.setInterval(() => setSeconds(prev => prev + 1), 1000);
         }
 
-        return () => clearInterval(timer); // works, timer is a number
+        return () => clearInterval(timer);
         }, [loading]);
 
 
@@ -126,8 +128,25 @@ export const LmModal = () => {
         }
     };
 
+    const handleAddToEditor = () => {
+        if (!editor || !answer || addToEditor) return;
+
+        setAddToEditor(true);
+        setTimeout(() => {
+            editor.chain().focus().run();
+
+            editor.chain()
+                .focus()
+                .insertContent(answer)
+                .run();
+
+            setAnswer("");
+            setAddToEditor(false)
+        })
+    }
+
     // Debug: Log when this component renders
-    console.log("LmModal rendering, isOpen:", lmQuery.isOpen);
+    // console.log("LmModal rendering, isOpen:", lmQuery.isOpen);
 
     if (!lmQuery.isOpen) return null;
 
@@ -169,6 +188,15 @@ export const LmModal = () => {
                         <div className="mt-4 p-3 bg-[#2a2a2a] rounded-md max-h-96 overflow-y-auto">
                             <AnswerView answer={answer} />
                             <p className="text-xs text-gray-400 mt-2">Answer Generated in {responseTime} seconds.</p>
+                            <button
+                                onClick={handleAddToEditor}
+                                disabled={!editor || !answer || addToEditor}
+                                className={`mt-2 px-3 py-1 bg-blue-500 text-white rounded ${
+                                    addToEditor ? 'disabled:bg-gray-400 cursor-not-allowed' : ''
+                                }`}
+                            >
+                                {addToEditor ? "Adding..." : "Add to Editor"}
+                            </button>
                         </div>
                     )}
                 </div>

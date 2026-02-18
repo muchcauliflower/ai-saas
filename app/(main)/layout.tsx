@@ -10,6 +10,7 @@ import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from '@tiptap/extension-link';
 import { ModalProvider } from "@/components/providers/model-provider";
+import { Markdown } from "tiptap-markdown";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
@@ -17,6 +18,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
+      Markdown,
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {

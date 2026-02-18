@@ -148,3 +148,10 @@ body,
     filter: blur(0);
   }
 }
+
+@keyframes typewriterFade {
+  to {
+    opacity: 1;
+  }
+}
+

@@ -11,12 +11,13 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Markdown } from "tiptap-markdown";
 import { StaggerExtension } from "../extensions/stagger-animations";
+import { TypewriterExtension } from "../extensions/typewriter-effect";
 
 // for AI's response
 const AnswerView = ({ answer }: {answer: string}) => {
     const editor = useEditor({
         immediatelyRender: false,
-        extensions: [StarterKit, Markdown, StaggerExtension],
+        extensions: [StarterKit, Markdown, TypewriterExtension],
         content: answer || "",
         editable: false,
         editorProps: {

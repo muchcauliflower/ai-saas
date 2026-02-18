@@ -1,6 +1,6 @@
 "use client";
 
-import { BoldIcon, Code, ItalicIcon, LinkIcon, List, ListOrdered, Wand } from "lucide-react";
+import { BoldIcon, Code, ItalicIcon, LinkIcon, List, ListOrdered, Save, Wand } from "lucide-react";
 import { Button } from "./ui/button";
 import { Scrollbar } from 'react-scrollbars-custom';
 
@@ -166,24 +166,8 @@ export const FixedToolbar = () =>{
                     variant="clear"
                     onClick={handleSave}
                     >
-                    Save
-                    </Button>
-
-                    <Button
-                    onClick={handleJSON}
-                    className="btn-clear" variant="clear"
-                    >
-                        <Code className="tiptap-button-icon" />
-                        JSON
-                    </Button>
-
-                    {/* Generate as text */}
-                    <Button
-                    onClick={generateAsText}
-                    className="btn-clear" variant="clear"
-                    >
-                        <Code className="tiptap-button-icon" />
-                        Generate as Text
+                        <Save className="tiptap-button-icon" />
+                        Save
                     </Button>
 
                     {/* AY AI */}

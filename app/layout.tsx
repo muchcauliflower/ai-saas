@@ -45,7 +45,7 @@ export default function RootLayout({
                   storageKey="jotion-theme"
                 >
                   <Toaster position="bottom-center" />
-                  <ModalProvider />
+                  {/* <ModalProvider /> */}
                   {children}
                 </ThemeProvider>
               </EdgeStoreProvider>

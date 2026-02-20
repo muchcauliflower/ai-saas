@@ -2,16 +2,27 @@
 
 import React, { useState, useEffect } from "react";
 import { ChevronRight, Loader2 } from "lucide-react";
-
 import { uselmQuery } from "@/hooks/use-lm-query";
+
 import { useEditorContext } from "@/app/contexts/editor-contexts";
 import { toast } from "sonner";
+
 import Editor from "@/app/_components/editor";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Markdown } from "tiptap-markdown";
-import { StaggerExtension } from "../extensions/stagger-animations";
 import { TypewriterExtension } from "../extensions/typewriter-effect";
+
+
+const testfunction = () => {
+    // test
+    // test
+    // test
+    // test
+    // test
+    // test
+    // test
+}
 
 // for AI's response
 const AnswerView = ({ answer }: {answer: string}) => {
@@ -50,6 +61,8 @@ export const LmModal = () => {
     const [loading, setLoading] = useState(false);
 
     const [addToEditor, setAddToEditor] = useState<boolean>(false);
+
+    const history = useHistory
 
     // Debug logging
     useEffect(() => {

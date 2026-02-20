@@ -10,7 +10,7 @@ export const TypewriterExtension = Extension.create({
   addOptions() {
     return {
       enabled: true,
-      speed: 3, // ms per character
+      speed: 2, // ms per character
     }
   },
 
